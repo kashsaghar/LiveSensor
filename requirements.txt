@@ -1,0 +1,4 @@
+pymongo==4.3.3
+
+#it is so that you dont need to run setup.py, e will trigger setup.py and check the func find_packages for all packages
+-e . #editable mode 
