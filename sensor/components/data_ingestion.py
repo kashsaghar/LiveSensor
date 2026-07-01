@@ -73,7 +73,7 @@ class DataIngestion:
 
             logging.info(f"Exported train and test file path.")
         except Exception as e:
-            raise SensorData(e,sys)
+            raise SensorException(e,sys)
      
 #call the above functions in a single function and return the artifact 
     def initiate_data_ingestion(self) -> DataIngestionArtifact:

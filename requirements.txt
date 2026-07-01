@@ -7,3 +7,5 @@ numpy
 scikit-learn
 pymongo
 python-dotenv
+PyYAML
+dill

@@ -1,7 +1,8 @@
 from sensor.exception import SensorException
 import sys
 from sensor.logger import logging
-from sensor.utils import dump_csv_file_to_mongodb_collection
+from sensor.utils2 import dump_csv_file_to_mongodb_collection
+from sensor.pipeline.training_pipeline import TrainPipeline
 
 # def test_exception():
 #     try:
@@ -11,13 +12,15 @@ from sensor.utils import dump_csv_file_to_mongodb_collection
 #         raise SensorException(e, sys)
     
 
-if __name__ == "__main__":
-    file_path = "aps_failure_training_set1.csv"
-    database_name = "liveclass"
-    collection_name = "mongoclass"
-    dump_csv_file_to_mongodb_collection(file_path, database_name, collection_name)
 
-    
+if __name__ == "__main__":
+    # file_path = "aps_failure_training_set1.csv"
+    # database_name = "liveclass"
+    # collection_name = "mongoclass"
+    # dump_csv_file_to_mongodb_collection(file_path, database_name, collection_name)
+
+    training_pipeline = TrainPipeline()
+    training_pipeline.run_pipeline()
 #     try:
 #         test_exception()
 #     except Exception as e:
