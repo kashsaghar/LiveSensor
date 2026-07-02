@@ -7,7 +7,7 @@ import sys
 from sensor.exception import SensorException
 from sensor.logger import logging
 
-
+#yaml file has processed data which is readable
 def read_yaml_file(file_path:str)->dict:
     try:
 
@@ -31,7 +31,6 @@ def write_yaml_file(file_path: str, content: object, replace: bool = False) -> N
 
     except Exception as e:
         raise SensorException(e, sys)
-
 
 
 def save_numpy_array_data(file_path: str, array: np.array):
