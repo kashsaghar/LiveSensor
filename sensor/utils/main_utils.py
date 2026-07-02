@@ -63,7 +63,6 @@ def load_numpy_array_data(file_path: str) -> np.array:
     
 
 
-
 def save_object(file_path: str, obj: object) -> None:
     try:
         logging.info("Entered the save_object method of MainUtils class")
@@ -74,7 +73,6 @@ def save_object(file_path: str, obj: object) -> None:
     except Exception as e:
         raise SensorException(e, sys) from e
     
-
 
 
 def load_object(file_path: str, ) -> object:
