@@ -71,7 +71,7 @@ class DataTransformationConfig:
         
         
         self.transformed_object_file_path: str = os.path.join( self.data_transformation_dir, training_pipeline.DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR,
-            training_pipeline.PREPROCSSING_OBJECT_FILE_NAME,)
+            training_pipeline.PREPROCESSING_OBJECT_FILE_NAME,)
 
    
 class ModelTrainerConfig:
@@ -87,7 +87,6 @@ class ModelTrainerConfig:
             self.model_trainer_dir, training_pipeline.MODEL_TRAINER_TRAINED_MODEL_DIR, 
             training_pipeline.MODEL_FILE_NAME
         )
-
 
 
         self.expected_accuracy: float = training_pipeline.MODEL_TRAINER_EXPECTED_SCORE
@@ -108,8 +107,6 @@ class ModelEvaluationConfig:
 
         
         self.change_threshold = training_pipeline.MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE
-
-
 
 
 

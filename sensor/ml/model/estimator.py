@@ -16,7 +16,6 @@ class TargetValueMapping:
     
 
 
-
 class SensorModel:
 
     def __init__(self,preprocessor,model):
@@ -46,7 +45,7 @@ class ModelResolver:
             raise e    
 
 
-    def get_best_model_path(self,)->str:
+    def get_best_model_path(self)->str:
         try:
             timestamps = list(map(int,os.listdir(self.model_dir)))
             latest_timestamp = max(timestamps)

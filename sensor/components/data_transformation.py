@@ -80,18 +80,26 @@ class DataTransformation:
             preprocessor = self.get_data_transformer_object()
 
             #training dataframe
-            input_feature_train_df = train_df.drop(columns=[TARGET_COLUMN], axis=1)
+            input_feature_train_df = train_df.drop(columns=[TARGET_COLUMN])
 
             target_feature_train_df = train_df[TARGET_COLUMN]
 
-            target_feature_train_df = target_feature_train_df.replace( TargetValueMapping().to_dict())
+            target_feature_train_df = (
+                target_feature_train_df
+                .replace(TargetValueMapping().to_dict())
+                .astype(int)
+            )
 
             #testing dataframe
-            input_feature_test_df = test_df.drop(columns=[TARGET_COLUMN], axis=1)
+            input_feature_test_df = test_df.drop(columns=[TARGET_COLUMN])
 
             target_feature_test_df = test_df[TARGET_COLUMN]
 
-            target_feature_test_df = target_feature_test_df.replace(TargetValueMapping().to_dict())
+            target_feature_test_df = (
+                target_feature_test_df
+                .replace(TargetValueMapping().to_dict())
+                .astype(int)
+            )
 
             preprocessor_object = preprocessor.fit(input_feature_train_df)
 
@@ -101,11 +109,15 @@ class DataTransformation:
 
             smt = SMOTETomek(sampling_strategy="minority")
 
+            print(type(target_feature_train_df))
+            print(target_feature_train_df.dtype)
+            print(target_feature_train_df.head())
+            print(target_feature_train_df.unique())
+
 
             input_feature_train_final, target_feature_train_final = smt.fit_resample(
                 transformed_input_train_feature, target_feature_train_df
             )
-
 
             input_feature_test_final, target_feature_test_final = smt.fit_resample(
                 transformed_input_test_feature, target_feature_test_df
