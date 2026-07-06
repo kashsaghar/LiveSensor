@@ -189,6 +189,94 @@ python main.py
 ```
 
 ---
+## Prediction
+
+The project provides a FastAPI endpoint for predicting whether an APS sensor record belongs to the **positive (failure)** or **negative (non-failure)** class.
+
+### Start the API
+
+Run the application:
+
+```bash
+python app.py
+```
+
+or
+
+```bash
+uvicorn app:app --host 0.0.0.0 --port 8080 --reload
+```
+
+Open your browser and go to:
+
+```
+http://127.0.0.1:8080
+```
+
+The interactive Swagger UI will open.
+
+---
+
+## Upload a CSV File
+
+1. Open the **/predict** endpoint.
+2. Click **Try it out**.
+3. Click **Choose File**.
+4. Upload a CSV file containing the sensor features.
+5. Click **Execute**.
+
+---
+
+## Input File Requirements
+
+The uploaded CSV should:
+
+- Contain the same feature columns used during training.
+- **Not** contain the target column (`class`).
+- **Not** contain the dropped columns:
+  - `ab_000`
+  - `bn_000`
+  - `bo_000`
+  - `bp_000`
+  - `bq_000`
+  - `br_000`
+  - `cr_000`
+- Missing values should be represented as `na`.
+
+A sample prediction file (`prediction_input.csv`) is included in this repository.
+
+---
+
+## Prediction Output
+
+After a successful prediction, the API automatically downloads a file named:
+
+```
+prediction_output.csv
+```
+
+The output file contains all the original input columns along with an additional column:
+
+| Column | Description |
+|---------|-------------|
+| predicted_column | Predicted class (`pos` or `neg`) |
+
+Example:
+
+| aa_000 | ac_000 | ... | predicted_column |
+|--------:|--------:|-----|------------------|
+| 453236 | na | ... | neg |
+| 902970 | na | ... | pos |
+
+---
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/` | Redirects to Swagger UI |
+| GET | `/train` | Trains the machine learning pipeline |
+| POST | `/predict` | Upload a CSV file and receive predictions |
 
 ## Future Improvements
 
