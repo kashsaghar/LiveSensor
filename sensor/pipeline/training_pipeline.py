@@ -14,9 +14,11 @@ from sensor.entity.artifact_entity import DataIngestionArtifact, DataValidationA
 
 
 class TrainPipeline:
+    is_pipeline_running = False
 
     def __init__(self):
         self.training_pipeline_config = TrainingPipelineConfig()
+
 
 
     def start_data_ingestion(self)->DataIngestionArtifact:
@@ -137,6 +139,8 @@ class TrainPipeline:
 
     def run_pipeline(self):
         try:
+
+            TrainPipeline.is_pipeline_running = True
             data_ingestion_artifact:DataIngestionArtifact = self.start_data_ingestion()
 
             data_validation_artifact = self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
@@ -154,14 +158,15 @@ class TrainPipeline:
 
             model_pusher_artifact = self.start_model_pusher(model_eval_artifact)       
 
-            # TrainPipeline.is_pipeline_running = False
+            TrainPipeline.is_pipeline_running = False
 
             # self.sync_artifact_dir_to_s3()
             # self.sync_saved_model_dir_to_s3()
+
             
         except Exception as e : 
             # self.sync_artifact_dir_to_s3()
-            # TrainPipeline.is_pipeline_running = False
+            TrainPipeline.is_pipeline_running = False
  
             raise  SensorException(e,sys)
 
